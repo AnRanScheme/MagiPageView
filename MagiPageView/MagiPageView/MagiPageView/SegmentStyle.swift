@@ -13,11 +13,13 @@ import UIKit
 /**
  override func viewDidLoad() {
  super.viewDidLoad()
- NSNotificationCenter.defaultCenter().addObserver(self
- , selector: #selector(self.didSelectIndex(_:)), name: ScrollPageViewDidShowThePageNotification, object: nil)
+ NotificationCenter.default.addObserver(self,
+ selector: #selector(didSelectIndex(_:)),
+ name: NSNotification.Name(ScrollPageViewDidShowThePageNotification),
+ object: nil)
  }
  
- func didSelectIndex(noti: NSNotification) {
+ func didSelectIndex(_ noti: NSNotification) {
  let userInfo = noti.userInfo!
  //注意键名是currentIndex
  print(userInfo["currentIndex"])
@@ -26,10 +28,12 @@ import UIKit
  特别注意的是如果你的控制器是使用的storyBoard初始化, 务必重写这个初始化方法中注册通知监听者, 如果在viewDidLoad中注册,在第一次的时候将不会接受到通知
  required init?(coder aDecoder: NSCoder) {
  super.init(coder: aDecoder)
- NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.didSelectIndex(_:)), name: ScrollPageViewDidShowThePageNotification, object: nil)
- 
+ NotificationCenter.default.addObserver(self,
+ selector: #selector(didSelectIndex(_:)),
+ name: NSNotification.Name(ScrollPageViewDidShowThePageNotification),
+ object: nil)
  }
- func didSelectIndex(noti: NSNotification) {
+ func didSelectIndex(_ noti: Notification) {
  let userInfo = noti.userInfo!
  //注意键名是currentIndex
  print(userInfo["currentIndex"])
